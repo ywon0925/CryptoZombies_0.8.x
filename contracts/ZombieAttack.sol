@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.0 <0.9.0;
 
 import "./ZombieHelper.sol";
@@ -8,7 +9,7 @@ contract ZombieAttack is ZombieHelper {
 
   function randMod(uint _modulus) internal returns(uint) {
     randNonce = randNonce + 1;
-    return uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) % _modulus;
+    return uint(keccak256(abi.encodePacked(block.timestamp, msg.sender, randNonce))) % _modulus;
   }
 
   function attack(uint _zombieId, uint _targetId) external onlyOwnerOf(_zombieId) {
